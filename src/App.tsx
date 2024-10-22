@@ -4,11 +4,12 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { JaaButton, JaaTable } from 'jaa-my-component-library';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
-import { Divider, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
+import { Divider, TableBody, TableCell, TableContainer, TableHead, TableRow, Switch } from '@mui/material'
 import Table from '@mui/material/Table';
 
 function App() {
   const [count, setCount] = useState(0)
+  const [mode, setMode] = useState(true)
 
   const darktheme = createTheme({
     palette: {
@@ -46,6 +47,9 @@ function App() {
         styleOverrides: {
           head: {
             backgroundColor: '#00d51a'
+          },
+          root: {
+            backgroundColor: '#fcdbff',
           }
         }
       }
@@ -54,7 +58,7 @@ function App() {
 
   return (
     <>
-    <ThemeProvider theme={darktheme}>
+    <ThemeProvider theme={mode ? darktheme : lighttheme}>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -62,8 +66,9 @@ function App() {
         <a href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
+        dark<Switch onChange={() => setMode(!mode)}></Switch> light
       </div>
-      Using a table from the 3rd party library doesn't apply theme:
+      Using a table from the 3rd party library doesn't propagate the theme:
       <JaaTable></JaaTable>
       <Divider sx={{my:4}} />
       Using a Mui Table directly in this App gets the theme applied: 
