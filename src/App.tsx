@@ -6,9 +6,9 @@ import { JaaButton, JaaTable } from 'jaa-my-component-library';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import { Divider, TableBody, TableCell, TableContainer, TableHead, TableRow, Switch } from '@mui/material'
 import Table from '@mui/material/Table';
+import Paper from '@mui/material/Paper';
 
 function App() {
-  const [count, setCount] = useState(0)
   const [mode, setMode] = useState(true)
 
   const darktheme = createTheme({
@@ -60,19 +60,14 @@ function App() {
     <>
     <ThemeProvider theme={mode ? darktheme : lighttheme}>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+
         dark<Switch onChange={() => setMode(!mode)}></Switch> light
       </div>
       Using a table from the 3rd party library doesn't propagate the theme:
       <JaaTable></JaaTable>
       <Divider sx={{my:4}} />
       Using a Mui Table directly in this App gets the theme applied: 
-      <TableContainer>
+      <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
